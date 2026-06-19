@@ -73,6 +73,71 @@ def construir_regex():
         if tipo != 'DESCONOCIDO':
             regex_info.append({"tipo": tipo, "patron": patron})
     return regex_info
+def construir_automatas_regex():
+    return [
+        {
+            "token": "MESA",
+            "regex": r"M\d+",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":"M"},
+                {"desde":"q1","hacia":"q2","etiqueta":"0-9"},
+                {"desde":"q2","hacia":"q2","etiqueta":"0-9"}
+            ]
+        },
+        {
+            "token": "ENTRADA",
+            "regex": r"E\d+",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":"E"},
+                {"desde":"q1","hacia":"q2","etiqueta":"0-9"},
+                {"desde":"q2","hacia":"q2","etiqueta":"0-9"}
+            ]
+        },
+        {
+            "token": "COMIDA",
+            "regex": r"C\d+",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":"C"},
+                {"desde":"q1","hacia":"q2","etiqueta":"0-9"},
+                {"desde":"q2","hacia":"q2","etiqueta":"0-9"}
+            ]
+        },
+        {
+            "token": "BEBIDA",
+            "regex": r"B\d+",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":"B"},
+                {"desde":"q1","hacia":"q2","etiqueta":"0-9"},
+                {"desde":"q2","hacia":"q2","etiqueta":"0-9"}
+            ]
+        },
+        {
+            "token": "POSTRE",
+            "regex": r"P\d+",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":"P"},
+                {"desde":"q1","hacia":"q2","etiqueta":"0-9"},
+                {"desde":"q2","hacia":"q2","etiqueta":"0-9"}
+            ]
+        },
+        {
+            "token": "CANTIDAD",
+            "regex": r"X\d+",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":"X"},
+                {"desde":"q1","hacia":"q2","etiqueta":"0-9"},
+                {"desde":"q2","hacia":"q2","etiqueta":"0-9"}
+            ]
+        },
+        {
+            "token": "SEPARADOR",
+            "regex": r"[:,]",
+            "transiciones": [
+                {"desde":"q0","hacia":"q1","etiqueta":":"},
+                {"desde":"q0","hacia":"q1","etiqueta":","}
+            ]
+        }
+    ]
 
 def construir_agrupadores(tokens):
     agrupadores_dict = {}
@@ -173,7 +238,10 @@ def compilar():
         "tokens": tokens,
         "regex": regex,
         "agrupadores": construir_agrupadores(tokens),
+        
         "automata": construir_automata(),
+        "automatas_regex": construir_automatas_regex(),
+        
         "tabla_transiciones": construir_tabla_transiciones(),
         "arbol": arbol,
         "json": resultado
