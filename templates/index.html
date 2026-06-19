@@ -605,6 +605,8 @@
                 ${tablaAgrupadores}
                 <h3 style="margin-top:12px; margin-bottom:8px;">Expresiones regulares usadas:</h3>
                 <div class="texto-box">${regexTexto}</div>
+                <h3 style="margin-top:12px;">Autómatas de Expresiones Regulares</h3>
+                <div id="automatas-regex"></div>
                 <h3 style="margin-top:12px; margin-bottom:8px;">Tokens encontrados en esta instrucción:</h3>
                 <div class="texto-box">${tokensTexto}</div>
                 <h3 style="margin-top:12px; margin-bottom:8px;">Autómata Finito Determinista (AFD):</h3>
@@ -641,6 +643,7 @@
         setTimeout(() => {
             renderArbol(data.arbol);
             renderAutomata(data.automata);
+            renderAutomatasRegex(data.automatas_regex);
         }, 300);
     }
 
